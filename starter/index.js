@@ -38,10 +38,9 @@ function generateManager() {
             message: 'Please enter manager\'s office number.'
         }
     ]).then(data => {
-        team.push({
-            type: 'Manager',
-            data: new Manager(data.name, data.id, data.emailId, data.officeNumber)
-        });
+        team.push(
+            new Manager(data.name, data.id, data.emailId, data.officeNumber)
+        );
     });
 }
 
@@ -66,10 +65,9 @@ function generateEngineer() {
             message: 'Please enter Engineer\'s github username.',
         }
     ]).then(data => {
-        team.push({
-            type: 'Engineer',
-            data: new Engineer(data.name, data.id, data.emailId, data.githubUsername),
-        });
+        team.push(
+            new Engineer(data.name, data.id, data.emailId, data.githubUsername),
+        );
 
     });
 
@@ -98,10 +96,9 @@ function generateIntern() {
         }
 
     ]).then(data => {
-        team.push({
-            type: 'Intern',
-            data: new Intern(data.name, data.id, data.emailId, data.schoolName),
-        });
+        team.push(
+            new Intern(data.name, data.id, data.emailId, data.schoolName),
+        );
     });
 }
 
@@ -136,12 +133,14 @@ function editEmployeeOptions() {
         }
 
         console.log('Thanks for using our app!');
-        console.log(team);
         // process.exit();
         return team;
 
     }).then(teamData => {
-        return writeFile(JSON.stringify(teamData));
+        // console.log(teamData);
+        return render(teamData);
+    }).then(htmlData => {
+        return writeFile(htmlData);
     }).then(process.exit);
 }
 
