@@ -24,22 +24,36 @@ function generateManager() {
             message: 'Please enter Manager\'s name.',
         },
         {
-            type: 'number',
+            type: 'input',
             name: 'id',
             message: 'Please enter manager\'s id number.',
+            validate: numberInput => {
+                if (isNaN(numberInput)) {
+                    return 'please enter a number';
+                }
+                return true;
+            }
         },
         {
-            name: 'emailId',
-            message: 'Please enter manager\'s email id.'
+            type: 'input',
+            name: 'email',
+            message: 'Please enter manager\'s email id.',
+            validate: isValidEmail
         },
         {
-            type: 'number',
+            type: 'input',
             name: 'officeNumber',
-            message: 'Please enter manager\'s office number.'
+            message: 'Please enter manager\'s office number.',
+            validate: numberInput => {
+                if (isNaN(numberInput)) {
+                    return 'please enter a number';
+                }
+                return true;
+            }
         }
     ]).then(data => {
         team.push(
-            new Manager(data.name, data.id, data.emailId, data.officeNumber)
+            new Manager(data.name, data.id, data.email, data.officeNumber)
         );
     });
 }
@@ -52,13 +66,20 @@ function generateEngineer() {
             message: 'Please enter Engineer\'s name.',
         },
         {
-            type: 'number',
+            type: 'input',
             name: 'id',
             message: 'Please enter Engineer\'s id number.',
+            validate: numberInput => {
+                if (isNaN(numberInput)) {
+                    return 'please enter a number';
+                }
+                return true;
+            }
         },
         {
             name: 'emailId',
             message: 'Please enter Engineer\'s email id.',
+            validate: isValidEmail
         },
         {
             name: 'githubUsername',
@@ -82,13 +103,20 @@ function generateIntern() {
             message: 'Please enter Intern\'s name.',
         },
         {
-            type: 'number',
+            type: 'input',
             name: 'id',
             message: 'Please enter Intern\'s id number.',
+            validate: numberInput => {
+                if (isNaN(numberInput)) {
+                    return 'please enter a number';
+                }
+                return true;
+            }
         },
         {
             name: 'emailId',
             message: 'Please enter Intern\'s email id.',
+            validate: isValidEmail
         },
         {
             name: 'schoolName',
@@ -102,6 +130,16 @@ function generateIntern() {
     });
 }
 
+function isValidEmail(email) {
+
+    valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+    if (valid) {
+        return true;
+    } else {
+        return 'Please enter a valid email';
+    }
+
+}
 
 function editEmployeeOptions() {
     return inquirer.prompt({
@@ -143,6 +181,7 @@ function editEmployeeOptions() {
         return writeFile(htmlData);
     }).then(process.exit);
 }
+
 
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
