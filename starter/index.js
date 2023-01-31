@@ -61,6 +61,7 @@ function generateManager() {
 function generateEngineer() {
     //Adding engineer to development team
     return inquirer.prompt([
+        //Prompting user for name,id,email and github username.
         {
             name: 'name',
             message: 'Please enter Engineer\'s name.',
@@ -107,6 +108,7 @@ function generateIntern() {
             name: 'id',
             message: 'Please enter Intern\'s id number.',
             validate: numberInput => {
+                //validating the number for id
                 if (isNaN(numberInput)) {
                     return 'please enter a number';
                 }
@@ -131,7 +133,7 @@ function generateIntern() {
 }
 
 function isValidEmail(email) {
-
+    // Function for validation of email of employees
     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
     if (valid) {
         return true;
@@ -142,7 +144,9 @@ function isValidEmail(email) {
 }
 
 function editEmployeeOptions() {
+    //Creating options to choose between Manager, engineer and intern
     return inquirer.prompt({
+        //Prompting user for options
         type: 'list',
         name: 'option',
         message: 'Please choose an employee status to edit',
@@ -177,6 +181,7 @@ function editEmployeeOptions() {
     }).then(teamData => {
         // console.log(teamData);
         return render(teamData);
+        //rendering data into html format using page-template js file
     }).then(htmlData => {
         return writeFile(htmlData);
     }).then(process.exit);
@@ -193,6 +198,7 @@ const writeFile = fileContent => {
             resolve({
                 ok: true,
                 message: 'File created!'
+                //Generating  team.html file
             });
         });
     });
