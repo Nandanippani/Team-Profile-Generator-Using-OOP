@@ -17,9 +17,9 @@ This page shows deployed application of team generator app
 ![Alt text](assets/teamgeneratorapp.PNG)
 
 
-### The URL of the deployed application
+### Link to the team.html file generated using application
 
-
+https://github.com/Nandanippani/Team-Profile-Generator-Using-OOP/blob/main/starter/output/team.html
 
 ### The URL of the GitHub repository that contains my code
 
@@ -27,7 +27,7 @@ https://github.com/Nandanippani/Team-Profile-Generator-Using-OOP
 
 ## Installation
 
-N/A
+N/Agit 
 
 ## Usage
 
